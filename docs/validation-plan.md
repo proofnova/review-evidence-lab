@@ -29,3 +29,7 @@ Failure: a bad fixture passes, a valid control fails, the wrong condition explai
 If prior art already supplies the same learning pack with the same usable exercises, narrow this resource to a useful contribution to that project rather than calling a duplicate an innovation. If the reader needs signatures, Git-scope attestation, real command execution or merge authorization, point them to the appropriate existing tool.
 
 Local execution verifies this pack's behavior only. Independent reproduction, beginner learning gains, maintainer adoption and external impact remain unconfirmed until someone actually provides that evidence.
+
+## Interface extension before implementation
+
+The user requested an AI-related app accessible to anyone. Add a static browser interface to the same checks, within an additional 60-minute implementation/verification budget and still below the weekly six-hour ceiling. It must run the checks with Web Crypto on actual supplied bytes, use no backend/model/API key, distinguish fixture time from current time, and keep chosen files in the browser. Success requires all existing cases to agree between the Node and browser adapters and a real browser exercise. This improves access; it does not establish a new originality claim or user adoption.
