@@ -1,0 +1,219 @@
+{
+  "schema_version": 1,
+  "synthetic": true,
+  "evaluation_clock": "2026-01-01T12:00:00.000Z",
+  "catalog_sha256": "826e70193accb1a44adda49422562e45d5bd0efadaa0d753bb03e1d07e8be5cf",
+  "cases": 17,
+  "expectations_met": 17,
+  "results": [
+    {
+      "id": "valid-control",
+      "role": "control",
+      "summary_only_demo": true,
+      "consistent": true,
+      "expected_code": null,
+      "actual_codes": [],
+      "expectation_matched": true,
+      "lesson": "A complete, unchanged synthetic record is accepted."
+    },
+    {
+      "id": "missing-checks",
+      "role": "invariant",
+      "summary_only_demo": true,
+      "consistent": false,
+      "expected_code": "REQUIRED_CHECK_MISSING",
+      "actual_codes": [
+        "REQUIRED_CHECK_MISSING",
+        "REQUIRED_CHECK_MISSING"
+      ],
+      "expectation_matched": true,
+      "lesson": "A successful summary cannot replace absent checks."
+    },
+    {
+      "id": "required-check-skipped",
+      "role": "invariant",
+      "summary_only_demo": true,
+      "consistent": false,
+      "expected_code": "CHECK_NOT_PASSED",
+      "actual_codes": [
+        "CHECK_NOT_PASSED"
+      ],
+      "expectation_matched": true,
+      "lesson": "A deliberately skipped check is different from a performed check."
+    },
+    {
+      "id": "unknown-review-state",
+      "role": "invariant",
+      "summary_only_demo": true,
+      "consistent": false,
+      "expected_code": "CHECK_NOT_PASSED",
+      "actual_codes": [
+        "CHECK_NOT_PASSED"
+      ],
+      "expectation_matched": true,
+      "lesson": "Unknown is a separate state, not a success."
+    },
+    {
+      "id": "failure-behind-summary",
+      "role": "invariant",
+      "summary_only_demo": true,
+      "consistent": false,
+      "expected_code": "CHECK_NOT_PASSED",
+      "actual_codes": [
+        "CHECK_NOT_PASSED"
+      ],
+      "expectation_matched": true,
+      "lesson": "A failed detail must survive a successful outer summary."
+    },
+    {
+      "id": "zero-selected-items",
+      "role": "invariant",
+      "summary_only_demo": true,
+      "consistent": false,
+      "expected_code": "INSUFFICIENT_INSPECTION",
+      "actual_codes": [
+        "INSUFFICIENT_INSPECTION"
+      ],
+      "expectation_matched": true,
+      "lesson": "A check reporting zero inspected items needs explicit handling."
+    },
+    {
+      "id": "duplicate-check-id",
+      "role": "invariant",
+      "summary_only_demo": true,
+      "consistent": false,
+      "expected_code": "DUPLICATE_CHECK",
+      "actual_codes": [
+        "DUPLICATE_CHECK"
+      ],
+      "expectation_matched": true,
+      "lesson": "Repeated names are not independent checks."
+    },
+    {
+      "id": "material-changed",
+      "role": "invariant",
+      "summary_only_demo": true,
+      "consistent": false,
+      "expected_code": "MATERIAL_MISMATCH",
+      "actual_codes": [
+        "MATERIAL_MISMATCH",
+        "CHECK_SCOPE_MISMATCH",
+        "CHECK_SCOPE_MISMATCH"
+      ],
+      "expectation_matched": true,
+      "lesson": "Changing the actual subject invalidates its old receipt."
+    },
+    {
+      "id": "policy-changed",
+      "role": "invariant",
+      "summary_only_demo": true,
+      "consistent": false,
+      "expected_code": "POLICY_MISMATCH",
+      "actual_codes": [
+        "POLICY_MISMATCH",
+        "INSUFFICIENT_INSPECTION",
+        "INSUFFICIENT_INSPECTION"
+      ],
+      "expectation_matched": true,
+      "lesson": "An earlier policy cannot silently approve a new policy."
+    },
+    {
+      "id": "artifact-absent",
+      "role": "invariant",
+      "summary_only_demo": true,
+      "consistent": false,
+      "expected_code": "ARTIFACT_MISSING",
+      "actual_codes": [
+        "ARTIFACT_MISSING"
+      ],
+      "expectation_matched": true,
+      "lesson": "A reference is not an available artifact."
+    },
+    {
+      "id": "artifact-changed",
+      "role": "invariant",
+      "summary_only_demo": true,
+      "consistent": false,
+      "expected_code": "ARTIFACT_MISMATCH",
+      "actual_codes": [
+        "ARTIFACT_MISMATCH"
+      ],
+      "expectation_matched": true,
+      "lesson": "Reusing a path after overwriting a log changes the evidence."
+    },
+    {
+      "id": "artifact-empty",
+      "role": "invariant",
+      "summary_only_demo": true,
+      "consistent": false,
+      "expected_code": "ARTIFACT_EMPTY",
+      "actual_codes": [
+        "ARTIFACT_EMPTY"
+      ],
+      "expectation_matched": true,
+      "lesson": "Even a correctly hashed empty log is insufficient."
+    },
+    {
+      "id": "receipt-too-old",
+      "role": "invariant",
+      "summary_only_demo": true,
+      "consistent": false,
+      "expected_code": "STALE_RECEIPT",
+      "actual_codes": [
+        "STALE_RECEIPT"
+      ],
+      "expectation_matched": true,
+      "lesson": "A matching subject does not remove freshness requirements."
+    },
+    {
+      "id": "receipt-in-future",
+      "role": "invariant",
+      "summary_only_demo": true,
+      "consistent": false,
+      "expected_code": "FUTURE_RECEIPT",
+      "actual_codes": [
+        "FUTURE_RECEIPT"
+      ],
+      "expectation_matched": true,
+      "lesson": "Future dates should not bypass freshness checks."
+    },
+    {
+      "id": "one-check-omitted",
+      "role": "invariant",
+      "summary_only_demo": true,
+      "consistent": false,
+      "expected_code": "REQUIRED_CHECK_MISSING",
+      "actual_codes": [
+        "REQUIRED_CHECK_MISSING"
+      ],
+      "expectation_matched": true,
+      "lesson": "A partial set of successful checks is still partial."
+    },
+    {
+      "id": "check-for-other-scope",
+      "role": "invariant",
+      "summary_only_demo": true,
+      "consistent": false,
+      "expected_code": "CHECK_SCOPE_MISMATCH",
+      "actual_codes": [
+        "CHECK_SCOPE_MISMATCH"
+      ],
+      "expectation_matched": true,
+      "lesson": "An outer matching receipt cannot rescue an inner stale check."
+    },
+    {
+      "id": "forged-but-consistent",
+      "role": "limitation",
+      "summary_only_demo": true,
+      "consistent": true,
+      "expected_code": null,
+      "actual_codes": [],
+      "expectation_matched": true,
+      "lesson": "Fabricated but mutually matching claims can pass. Hashes do not authenticate a review."
+    }
+  ],
+  "limitations": [
+    "Deterministic teaching fixtures, not production-tool benchmarks.",
+    "Record consistency does not authenticate claims, prove review quality or demonstrate external user impact."
+  ]
+}
