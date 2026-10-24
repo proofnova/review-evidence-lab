@@ -1,0 +1,794 @@
+[
+  {
+    "id": "valid-control",
+    "mutation": "none",
+    "role": "control",
+    "consistent": true,
+    "expected_code": null,
+    "lesson": "A complete, unchanged synthetic record is accepted.",
+    "receipt": {
+      "schema_version": 1,
+      "synthetic": true,
+      "summary": "success",
+      "created_at": "2026-01-01T12:00:00.000Z",
+      "material_sha256": "1cbbeb9ed66990c959c3faa983f27de51277e51ef5a10f2a1012f431321e42e4",
+      "policy_sha256": "4509c9eee2e6911b18ff94e097497e2ef7ff714a0b853dd0e77854cabe47db95",
+      "checks": [
+        {
+          "id": "review",
+          "status": "passed",
+          "material_sha256": "1cbbeb9ed66990c959c3faa983f27de51277e51ef5a10f2a1012f431321e42e4",
+          "inspected_items": 1,
+          "evidence": [
+            {
+              "artifact_id": "review.txt",
+              "sha256": "7f75284a783e450dbef7e51adfbe466c1cbc63c03032ec2e99c14708adfa0ebc"
+            }
+          ]
+        },
+        {
+          "id": "tests",
+          "status": "passed",
+          "material_sha256": "1cbbeb9ed66990c959c3faa983f27de51277e51ef5a10f2a1012f431321e42e4",
+          "inspected_items": 1,
+          "evidence": [
+            {
+              "artifact_id": "tests.txt",
+              "sha256": "481b4cb57b45068760279e8e8371d064d0d67a0ee1a1f5ee8a2ef3c1c123dfee"
+            }
+          ]
+        }
+      ]
+    },
+    "material": "Synthetic change: handle an empty input.\n",
+    "policy": "{\"required_checks\":[\"review\",\"tests\"],\"min_inspected_items\":1,\"max_age_seconds\":3600,\"future_tolerance_seconds\":60}",
+    "artifacts": {
+      "review.txt": "Synthetic review notes; no person performed this review.\n",
+      "tests.txt": "Synthetic test output; the fixture is not a real external test run.\n"
+    },
+    "now": 1767268800000
+  },
+  {
+    "id": "missing-checks",
+    "mutation": "missing-checks",
+    "consistent": false,
+    "expected_code": "REQUIRED_CHECK_MISSING",
+    "lesson": "A successful summary cannot replace absent checks.",
+    "receipt": {
+      "schema_version": 1,
+      "synthetic": true,
+      "summary": "success",
+      "created_at": "2026-01-01T12:00:00.000Z",
+      "material_sha256": "1cbbeb9ed66990c959c3faa983f27de51277e51ef5a10f2a1012f431321e42e4",
+      "policy_sha256": "4509c9eee2e6911b18ff94e097497e2ef7ff714a0b853dd0e77854cabe47db95",
+      "checks": []
+    },
+    "material": "Synthetic change: handle an empty input.\n",
+    "policy": "{\"required_checks\":[\"review\",\"tests\"],\"min_inspected_items\":1,\"max_age_seconds\":3600,\"future_tolerance_seconds\":60}",
+    "artifacts": {
+      "review.txt": "Synthetic review notes; no person performed this review.\n",
+      "tests.txt": "Synthetic test output; the fixture is not a real external test run.\n"
+    },
+    "now": 1767268800000
+  },
+  {
+    "id": "required-check-skipped",
+    "mutation": "required-check-skipped",
+    "consistent": false,
+    "expected_code": "CHECK_NOT_PASSED",
+    "lesson": "A deliberately skipped check is different from a performed check.",
+    "receipt": {
+      "schema_version": 1,
+      "synthetic": true,
+      "summary": "success",
+      "created_at": "2026-01-01T12:00:00.000Z",
+      "material_sha256": "1cbbeb9ed66990c959c3faa983f27de51277e51ef5a10f2a1012f431321e42e4",
+      "policy_sha256": "4509c9eee2e6911b18ff94e097497e2ef7ff714a0b853dd0e77854cabe47db95",
+      "checks": [
+        {
+          "id": "review",
+          "status": "skipped",
+          "material_sha256": "1cbbeb9ed66990c959c3faa983f27de51277e51ef5a10f2a1012f431321e42e4",
+          "inspected_items": 1,
+          "evidence": [
+            {
+              "artifact_id": "review.txt",
+              "sha256": "7f75284a783e450dbef7e51adfbe466c1cbc63c03032ec2e99c14708adfa0ebc"
+            }
+          ]
+        },
+        {
+          "id": "tests",
+          "status": "passed",
+          "material_sha256": "1cbbeb9ed66990c959c3faa983f27de51277e51ef5a10f2a1012f431321e42e4",
+          "inspected_items": 1,
+          "evidence": [
+            {
+              "artifact_id": "tests.txt",
+              "sha256": "481b4cb57b45068760279e8e8371d064d0d67a0ee1a1f5ee8a2ef3c1c123dfee"
+            }
+          ]
+        }
+      ]
+    },
+    "material": "Synthetic change: handle an empty input.\n",
+    "policy": "{\"required_checks\":[\"review\",\"tests\"],\"min_inspected_items\":1,\"max_age_seconds\":3600,\"future_tolerance_seconds\":60}",
+    "artifacts": {
+      "review.txt": "Synthetic review notes; no person performed this review.\n",
+      "tests.txt": "Synthetic test output; the fixture is not a real external test run.\n"
+    },
+    "now": 1767268800000
+  },
+  {
+    "id": "unknown-review-state",
+    "mutation": "unknown-review-state",
+    "consistent": false,
+    "expected_code": "CHECK_NOT_PASSED",
+    "lesson": "Unknown is a separate state, not a success.",
+    "receipt": {
+      "schema_version": 1,
+      "synthetic": true,
+      "summary": "success",
+      "created_at": "2026-01-01T12:00:00.000Z",
+      "material_sha256": "1cbbeb9ed66990c959c3faa983f27de51277e51ef5a10f2a1012f431321e42e4",
+      "policy_sha256": "4509c9eee2e6911b18ff94e097497e2ef7ff714a0b853dd0e77854cabe47db95",
+      "checks": [
+        {
+          "id": "review",
+          "status": "unknown",
+          "material_sha256": "1cbbeb9ed66990c959c3faa983f27de51277e51ef5a10f2a1012f431321e42e4",
+          "inspected_items": 1,
+          "evidence": [
+            {
+              "artifact_id": "review.txt",
+              "sha256": "7f75284a783e450dbef7e51adfbe466c1cbc63c03032ec2e99c14708adfa0ebc"
+            }
+          ]
+        },
+        {
+          "id": "tests",
+          "status": "passed",
+          "material_sha256": "1cbbeb9ed66990c959c3faa983f27de51277e51ef5a10f2a1012f431321e42e4",
+          "inspected_items": 1,
+          "evidence": [
+            {
+              "artifact_id": "tests.txt",
+              "sha256": "481b4cb57b45068760279e8e8371d064d0d67a0ee1a1f5ee8a2ef3c1c123dfee"
+            }
+          ]
+        }
+      ]
+    },
+    "material": "Synthetic change: handle an empty input.\n",
+    "policy": "{\"required_checks\":[\"review\",\"tests\"],\"min_inspected_items\":1,\"max_age_seconds\":3600,\"future_tolerance_seconds\":60}",
+    "artifacts": {
+      "review.txt": "Synthetic review notes; no person performed this review.\n",
+      "tests.txt": "Synthetic test output; the fixture is not a real external test run.\n"
+    },
+    "now": 1767268800000
+  },
+  {
+    "id": "failure-behind-summary",
+    "mutation": "failure-behind-summary",
+    "consistent": false,
+    "expected_code": "CHECK_NOT_PASSED",
+    "lesson": "A failed detail must survive a successful outer summary.",
+    "receipt": {
+      "schema_version": 1,
+      "synthetic": true,
+      "summary": "success",
+      "created_at": "2026-01-01T12:00:00.000Z",
+      "material_sha256": "1cbbeb9ed66990c959c3faa983f27de51277e51ef5a10f2a1012f431321e42e4",
+      "policy_sha256": "4509c9eee2e6911b18ff94e097497e2ef7ff714a0b853dd0e77854cabe47db95",
+      "checks": [
+        {
+          "id": "review",
+          "status": "failed",
+          "material_sha256": "1cbbeb9ed66990c959c3faa983f27de51277e51ef5a10f2a1012f431321e42e4",
+          "inspected_items": 1,
+          "evidence": [
+            {
+              "artifact_id": "review.txt",
+              "sha256": "7f75284a783e450dbef7e51adfbe466c1cbc63c03032ec2e99c14708adfa0ebc"
+            }
+          ]
+        },
+        {
+          "id": "tests",
+          "status": "passed",
+          "material_sha256": "1cbbeb9ed66990c959c3faa983f27de51277e51ef5a10f2a1012f431321e42e4",
+          "inspected_items": 1,
+          "evidence": [
+            {
+              "artifact_id": "tests.txt",
+              "sha256": "481b4cb57b45068760279e8e8371d064d0d67a0ee1a1f5ee8a2ef3c1c123dfee"
+            }
+          ]
+        }
+      ]
+    },
+    "material": "Synthetic change: handle an empty input.\n",
+    "policy": "{\"required_checks\":[\"review\",\"tests\"],\"min_inspected_items\":1,\"max_age_seconds\":3600,\"future_tolerance_seconds\":60}",
+    "artifacts": {
+      "review.txt": "Synthetic review notes; no person performed this review.\n",
+      "tests.txt": "Synthetic test output; the fixture is not a real external test run.\n"
+    },
+    "now": 1767268800000
+  },
+  {
+    "id": "zero-selected-items",
+    "mutation": "zero-selected-items",
+    "consistent": false,
+    "expected_code": "INSUFFICIENT_INSPECTION",
+    "lesson": "A check reporting zero inspected items needs explicit handling.",
+    "receipt": {
+      "schema_version": 1,
+      "synthetic": true,
+      "summary": "success",
+      "created_at": "2026-01-01T12:00:00.000Z",
+      "material_sha256": "1cbbeb9ed66990c959c3faa983f27de51277e51ef5a10f2a1012f431321e42e4",
+      "policy_sha256": "4509c9eee2e6911b18ff94e097497e2ef7ff714a0b853dd0e77854cabe47db95",
+      "checks": [
+        {
+          "id": "review",
+          "status": "passed",
+          "material_sha256": "1cbbeb9ed66990c959c3faa983f27de51277e51ef5a10f2a1012f431321e42e4",
+          "inspected_items": 0,
+          "evidence": [
+            {
+              "artifact_id": "review.txt",
+              "sha256": "7f75284a783e450dbef7e51adfbe466c1cbc63c03032ec2e99c14708adfa0ebc"
+            }
+          ]
+        },
+        {
+          "id": "tests",
+          "status": "passed",
+          "material_sha256": "1cbbeb9ed66990c959c3faa983f27de51277e51ef5a10f2a1012f431321e42e4",
+          "inspected_items": 1,
+          "evidence": [
+            {
+              "artifact_id": "tests.txt",
+              "sha256": "481b4cb57b45068760279e8e8371d064d0d67a0ee1a1f5ee8a2ef3c1c123dfee"
+            }
+          ]
+        }
+      ]
+    },
+    "material": "Synthetic change: handle an empty input.\n",
+    "policy": "{\"required_checks\":[\"review\",\"tests\"],\"min_inspected_items\":1,\"max_age_seconds\":3600,\"future_tolerance_seconds\":60}",
+    "artifacts": {
+      "review.txt": "Synthetic review notes; no person performed this review.\n",
+      "tests.txt": "Synthetic test output; the fixture is not a real external test run.\n"
+    },
+    "now": 1767268800000
+  },
+  {
+    "id": "duplicate-check-id",
+    "mutation": "duplicate-check-id",
+    "consistent": false,
+    "expected_code": "DUPLICATE_CHECK",
+    "lesson": "Repeated names are not independent checks.",
+    "receipt": {
+      "schema_version": 1,
+      "synthetic": true,
+      "summary": "success",
+      "created_at": "2026-01-01T12:00:00.000Z",
+      "material_sha256": "1cbbeb9ed66990c959c3faa983f27de51277e51ef5a10f2a1012f431321e42e4",
+      "policy_sha256": "4509c9eee2e6911b18ff94e097497e2ef7ff714a0b853dd0e77854cabe47db95",
+      "checks": [
+        {
+          "id": "review",
+          "status": "passed",
+          "material_sha256": "1cbbeb9ed66990c959c3faa983f27de51277e51ef5a10f2a1012f431321e42e4",
+          "inspected_items": 1,
+          "evidence": [
+            {
+              "artifact_id": "review.txt",
+              "sha256": "7f75284a783e450dbef7e51adfbe466c1cbc63c03032ec2e99c14708adfa0ebc"
+            }
+          ]
+        },
+        {
+          "id": "tests",
+          "status": "passed",
+          "material_sha256": "1cbbeb9ed66990c959c3faa983f27de51277e51ef5a10f2a1012f431321e42e4",
+          "inspected_items": 1,
+          "evidence": [
+            {
+              "artifact_id": "tests.txt",
+              "sha256": "481b4cb57b45068760279e8e8371d064d0d67a0ee1a1f5ee8a2ef3c1c123dfee"
+            }
+          ]
+        },
+        {
+          "id": "review",
+          "status": "passed",
+          "material_sha256": "1cbbeb9ed66990c959c3faa983f27de51277e51ef5a10f2a1012f431321e42e4",
+          "inspected_items": 1,
+          "evidence": [
+            {
+              "artifact_id": "review.txt",
+              "sha256": "7f75284a783e450dbef7e51adfbe466c1cbc63c03032ec2e99c14708adfa0ebc"
+            }
+          ]
+        }
+      ]
+    },
+    "material": "Synthetic change: handle an empty input.\n",
+    "policy": "{\"required_checks\":[\"review\",\"tests\"],\"min_inspected_items\":1,\"max_age_seconds\":3600,\"future_tolerance_seconds\":60}",
+    "artifacts": {
+      "review.txt": "Synthetic review notes; no person performed this review.\n",
+      "tests.txt": "Synthetic test output; the fixture is not a real external test run.\n"
+    },
+    "now": 1767268800000
+  },
+  {
+    "id": "material-changed",
+    "mutation": "material-changed",
+    "consistent": false,
+    "expected_code": "MATERIAL_MISMATCH",
+    "lesson": "Changing the actual subject invalidates its old receipt.",
+    "receipt": {
+      "schema_version": 1,
+      "synthetic": true,
+      "summary": "success",
+      "created_at": "2026-01-01T12:00:00.000Z",
+      "material_sha256": "1cbbeb9ed66990c959c3faa983f27de51277e51ef5a10f2a1012f431321e42e4",
+      "policy_sha256": "4509c9eee2e6911b18ff94e097497e2ef7ff714a0b853dd0e77854cabe47db95",
+      "checks": [
+        {
+          "id": "review",
+          "status": "passed",
+          "material_sha256": "1cbbeb9ed66990c959c3faa983f27de51277e51ef5a10f2a1012f431321e42e4",
+          "inspected_items": 1,
+          "evidence": [
+            {
+              "artifact_id": "review.txt",
+              "sha256": "7f75284a783e450dbef7e51adfbe466c1cbc63c03032ec2e99c14708adfa0ebc"
+            }
+          ]
+        },
+        {
+          "id": "tests",
+          "status": "passed",
+          "material_sha256": "1cbbeb9ed66990c959c3faa983f27de51277e51ef5a10f2a1012f431321e42e4",
+          "inspected_items": 1,
+          "evidence": [
+            {
+              "artifact_id": "tests.txt",
+              "sha256": "481b4cb57b45068760279e8e8371d064d0d67a0ee1a1f5ee8a2ef3c1c123dfee"
+            }
+          ]
+        }
+      ]
+    },
+    "material": "Synthetic change: a different behavior.\n",
+    "policy": "{\"required_checks\":[\"review\",\"tests\"],\"min_inspected_items\":1,\"max_age_seconds\":3600,\"future_tolerance_seconds\":60}",
+    "artifacts": {
+      "review.txt": "Synthetic review notes; no person performed this review.\n",
+      "tests.txt": "Synthetic test output; the fixture is not a real external test run.\n"
+    },
+    "now": 1767268800000
+  },
+  {
+    "id": "policy-changed",
+    "mutation": "policy-changed",
+    "consistent": false,
+    "expected_code": "POLICY_MISMATCH",
+    "lesson": "An earlier policy cannot silently approve a new policy.",
+    "receipt": {
+      "schema_version": 1,
+      "synthetic": true,
+      "summary": "success",
+      "created_at": "2026-01-01T12:00:00.000Z",
+      "material_sha256": "1cbbeb9ed66990c959c3faa983f27de51277e51ef5a10f2a1012f431321e42e4",
+      "policy_sha256": "4509c9eee2e6911b18ff94e097497e2ef7ff714a0b853dd0e77854cabe47db95",
+      "checks": [
+        {
+          "id": "review",
+          "status": "passed",
+          "material_sha256": "1cbbeb9ed66990c959c3faa983f27de51277e51ef5a10f2a1012f431321e42e4",
+          "inspected_items": 1,
+          "evidence": [
+            {
+              "artifact_id": "review.txt",
+              "sha256": "7f75284a783e450dbef7e51adfbe466c1cbc63c03032ec2e99c14708adfa0ebc"
+            }
+          ]
+        },
+        {
+          "id": "tests",
+          "status": "passed",
+          "material_sha256": "1cbbeb9ed66990c959c3faa983f27de51277e51ef5a10f2a1012f431321e42e4",
+          "inspected_items": 1,
+          "evidence": [
+            {
+              "artifact_id": "tests.txt",
+              "sha256": "481b4cb57b45068760279e8e8371d064d0d67a0ee1a1f5ee8a2ef3c1c123dfee"
+            }
+          ]
+        }
+      ]
+    },
+    "material": "Synthetic change: handle an empty input.\n",
+    "policy": "{\"required_checks\":[\"review\",\"tests\"],\"min_inspected_items\":2,\"max_age_seconds\":3600,\"future_tolerance_seconds\":60}",
+    "artifacts": {
+      "review.txt": "Synthetic review notes; no person performed this review.\n",
+      "tests.txt": "Synthetic test output; the fixture is not a real external test run.\n"
+    },
+    "now": 1767268800000
+  },
+  {
+    "id": "artifact-absent",
+    "mutation": "artifact-absent",
+    "consistent": false,
+    "expected_code": "ARTIFACT_MISSING",
+    "lesson": "A reference is not an available artifact.",
+    "receipt": {
+      "schema_version": 1,
+      "synthetic": true,
+      "summary": "success",
+      "created_at": "2026-01-01T12:00:00.000Z",
+      "material_sha256": "1cbbeb9ed66990c959c3faa983f27de51277e51ef5a10f2a1012f431321e42e4",
+      "policy_sha256": "4509c9eee2e6911b18ff94e097497e2ef7ff714a0b853dd0e77854cabe47db95",
+      "checks": [
+        {
+          "id": "review",
+          "status": "passed",
+          "material_sha256": "1cbbeb9ed66990c959c3faa983f27de51277e51ef5a10f2a1012f431321e42e4",
+          "inspected_items": 1,
+          "evidence": [
+            {
+              "artifact_id": "review.txt",
+              "sha256": "7f75284a783e450dbef7e51adfbe466c1cbc63c03032ec2e99c14708adfa0ebc"
+            }
+          ]
+        },
+        {
+          "id": "tests",
+          "status": "passed",
+          "material_sha256": "1cbbeb9ed66990c959c3faa983f27de51277e51ef5a10f2a1012f431321e42e4",
+          "inspected_items": 1,
+          "evidence": [
+            {
+              "artifact_id": "tests.txt",
+              "sha256": "481b4cb57b45068760279e8e8371d064d0d67a0ee1a1f5ee8a2ef3c1c123dfee"
+            }
+          ]
+        }
+      ]
+    },
+    "material": "Synthetic change: handle an empty input.\n",
+    "policy": "{\"required_checks\":[\"review\",\"tests\"],\"min_inspected_items\":1,\"max_age_seconds\":3600,\"future_tolerance_seconds\":60}",
+    "artifacts": {
+      "tests.txt": "Synthetic test output; the fixture is not a real external test run.\n"
+    },
+    "now": 1767268800000
+  },
+  {
+    "id": "artifact-changed",
+    "mutation": "artifact-changed",
+    "consistent": false,
+    "expected_code": "ARTIFACT_MISMATCH",
+    "lesson": "Reusing a path after overwriting a log changes the evidence.",
+    "receipt": {
+      "schema_version": 1,
+      "synthetic": true,
+      "summary": "success",
+      "created_at": "2026-01-01T12:00:00.000Z",
+      "material_sha256": "1cbbeb9ed66990c959c3faa983f27de51277e51ef5a10f2a1012f431321e42e4",
+      "policy_sha256": "4509c9eee2e6911b18ff94e097497e2ef7ff714a0b853dd0e77854cabe47db95",
+      "checks": [
+        {
+          "id": "review",
+          "status": "passed",
+          "material_sha256": "1cbbeb9ed66990c959c3faa983f27de51277e51ef5a10f2a1012f431321e42e4",
+          "inspected_items": 1,
+          "evidence": [
+            {
+              "artifact_id": "review.txt",
+              "sha256": "7f75284a783e450dbef7e51adfbe466c1cbc63c03032ec2e99c14708adfa0ebc"
+            }
+          ]
+        },
+        {
+          "id": "tests",
+          "status": "passed",
+          "material_sha256": "1cbbeb9ed66990c959c3faa983f27de51277e51ef5a10f2a1012f431321e42e4",
+          "inspected_items": 1,
+          "evidence": [
+            {
+              "artifact_id": "tests.txt",
+              "sha256": "481b4cb57b45068760279e8e8371d064d0d67a0ee1a1f5ee8a2ef3c1c123dfee"
+            }
+          ]
+        }
+      ]
+    },
+    "material": "Synthetic change: handle an empty input.\n",
+    "policy": "{\"required_checks\":[\"review\",\"tests\"],\"min_inspected_items\":1,\"max_age_seconds\":3600,\"future_tolerance_seconds\":60}",
+    "artifacts": {
+      "review.txt": "Overwritten log.\n",
+      "tests.txt": "Synthetic test output; the fixture is not a real external test run.\n"
+    },
+    "now": 1767268800000
+  },
+  {
+    "id": "artifact-empty",
+    "mutation": "artifact-empty",
+    "consistent": false,
+    "expected_code": "ARTIFACT_EMPTY",
+    "lesson": "Even a correctly hashed empty log is insufficient.",
+    "receipt": {
+      "schema_version": 1,
+      "synthetic": true,
+      "summary": "success",
+      "created_at": "2026-01-01T12:00:00.000Z",
+      "material_sha256": "1cbbeb9ed66990c959c3faa983f27de51277e51ef5a10f2a1012f431321e42e4",
+      "policy_sha256": "4509c9eee2e6911b18ff94e097497e2ef7ff714a0b853dd0e77854cabe47db95",
+      "checks": [
+        {
+          "id": "review",
+          "status": "passed",
+          "material_sha256": "1cbbeb9ed66990c959c3faa983f27de51277e51ef5a10f2a1012f431321e42e4",
+          "inspected_items": 1,
+          "evidence": [
+            {
+              "artifact_id": "review.txt",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          ]
+        },
+        {
+          "id": "tests",
+          "status": "passed",
+          "material_sha256": "1cbbeb9ed66990c959c3faa983f27de51277e51ef5a10f2a1012f431321e42e4",
+          "inspected_items": 1,
+          "evidence": [
+            {
+              "artifact_id": "tests.txt",
+              "sha256": "481b4cb57b45068760279e8e8371d064d0d67a0ee1a1f5ee8a2ef3c1c123dfee"
+            }
+          ]
+        }
+      ]
+    },
+    "material": "Synthetic change: handle an empty input.\n",
+    "policy": "{\"required_checks\":[\"review\",\"tests\"],\"min_inspected_items\":1,\"max_age_seconds\":3600,\"future_tolerance_seconds\":60}",
+    "artifacts": {
+      "review.txt": "",
+      "tests.txt": "Synthetic test output; the fixture is not a real external test run.\n"
+    },
+    "now": 1767268800000
+  },
+  {
+    "id": "receipt-too-old",
+    "mutation": "receipt-too-old",
+    "consistent": false,
+    "expected_code": "STALE_RECEIPT",
+    "lesson": "A matching subject does not remove freshness requirements.",
+    "receipt": {
+      "schema_version": 1,
+      "synthetic": true,
+      "summary": "success",
+      "created_at": "2026-01-01T10:59:59.999Z",
+      "material_sha256": "1cbbeb9ed66990c959c3faa983f27de51277e51ef5a10f2a1012f431321e42e4",
+      "policy_sha256": "4509c9eee2e6911b18ff94e097497e2ef7ff714a0b853dd0e77854cabe47db95",
+      "checks": [
+        {
+          "id": "review",
+          "status": "passed",
+          "material_sha256": "1cbbeb9ed66990c959c3faa983f27de51277e51ef5a10f2a1012f431321e42e4",
+          "inspected_items": 1,
+          "evidence": [
+            {
+              "artifact_id": "review.txt",
+              "sha256": "7f75284a783e450dbef7e51adfbe466c1cbc63c03032ec2e99c14708adfa0ebc"
+            }
+          ]
+        },
+        {
+          "id": "tests",
+          "status": "passed",
+          "material_sha256": "1cbbeb9ed66990c959c3faa983f27de51277e51ef5a10f2a1012f431321e42e4",
+          "inspected_items": 1,
+          "evidence": [
+            {
+              "artifact_id": "tests.txt",
+              "sha256": "481b4cb57b45068760279e8e8371d064d0d67a0ee1a1f5ee8a2ef3c1c123dfee"
+            }
+          ]
+        }
+      ]
+    },
+    "material": "Synthetic change: handle an empty input.\n",
+    "policy": "{\"required_checks\":[\"review\",\"tests\"],\"min_inspected_items\":1,\"max_age_seconds\":3600,\"future_tolerance_seconds\":60}",
+    "artifacts": {
+      "review.txt": "Synthetic review notes; no person performed this review.\n",
+      "tests.txt": "Synthetic test output; the fixture is not a real external test run.\n"
+    },
+    "now": 1767268800000
+  },
+  {
+    "id": "receipt-in-future",
+    "mutation": "receipt-in-future",
+    "consistent": false,
+    "expected_code": "FUTURE_RECEIPT",
+    "lesson": "Future dates should not bypass freshness checks.",
+    "receipt": {
+      "schema_version": 1,
+      "synthetic": true,
+      "summary": "success",
+      "created_at": "2026-01-01T12:01:00.001Z",
+      "material_sha256": "1cbbeb9ed66990c959c3faa983f27de51277e51ef5a10f2a1012f431321e42e4",
+      "policy_sha256": "4509c9eee2e6911b18ff94e097497e2ef7ff714a0b853dd0e77854cabe47db95",
+      "checks": [
+        {
+          "id": "review",
+          "status": "passed",
+          "material_sha256": "1cbbeb9ed66990c959c3faa983f27de51277e51ef5a10f2a1012f431321e42e4",
+          "inspected_items": 1,
+          "evidence": [
+            {
+              "artifact_id": "review.txt",
+              "sha256": "7f75284a783e450dbef7e51adfbe466c1cbc63c03032ec2e99c14708adfa0ebc"
+            }
+          ]
+        },
+        {
+          "id": "tests",
+          "status": "passed",
+          "material_sha256": "1cbbeb9ed66990c959c3faa983f27de51277e51ef5a10f2a1012f431321e42e4",
+          "inspected_items": 1,
+          "evidence": [
+            {
+              "artifact_id": "tests.txt",
+              "sha256": "481b4cb57b45068760279e8e8371d064d0d67a0ee1a1f5ee8a2ef3c1c123dfee"
+            }
+          ]
+        }
+      ]
+    },
+    "material": "Synthetic change: handle an empty input.\n",
+    "policy": "{\"required_checks\":[\"review\",\"tests\"],\"min_inspected_items\":1,\"max_age_seconds\":3600,\"future_tolerance_seconds\":60}",
+    "artifacts": {
+      "review.txt": "Synthetic review notes; no person performed this review.\n",
+      "tests.txt": "Synthetic test output; the fixture is not a real external test run.\n"
+    },
+    "now": 1767268800000
+  },
+  {
+    "id": "one-check-omitted",
+    "mutation": "one-check-omitted",
+    "consistent": false,
+    "expected_code": "REQUIRED_CHECK_MISSING",
+    "lesson": "A partial set of successful checks is still partial.",
+    "receipt": {
+      "schema_version": 1,
+      "synthetic": true,
+      "summary": "success",
+      "created_at": "2026-01-01T12:00:00.000Z",
+      "material_sha256": "1cbbeb9ed66990c959c3faa983f27de51277e51ef5a10f2a1012f431321e42e4",
+      "policy_sha256": "4509c9eee2e6911b18ff94e097497e2ef7ff714a0b853dd0e77854cabe47db95",
+      "checks": [
+        {
+          "id": "review",
+          "status": "passed",
+          "material_sha256": "1cbbeb9ed66990c959c3faa983f27de51277e51ef5a10f2a1012f431321e42e4",
+          "inspected_items": 1,
+          "evidence": [
+            {
+              "artifact_id": "review.txt",
+              "sha256": "7f75284a783e450dbef7e51adfbe466c1cbc63c03032ec2e99c14708adfa0ebc"
+            }
+          ]
+        }
+      ]
+    },
+    "material": "Synthetic change: handle an empty input.\n",
+    "policy": "{\"required_checks\":[\"review\",\"tests\"],\"min_inspected_items\":1,\"max_age_seconds\":3600,\"future_tolerance_seconds\":60}",
+    "artifacts": {
+      "review.txt": "Synthetic review notes; no person performed this review.\n",
+      "tests.txt": "Synthetic test output; the fixture is not a real external test run.\n"
+    },
+    "now": 1767268800000
+  },
+  {
+    "id": "check-for-other-scope",
+    "mutation": "check-for-other-scope",
+    "consistent": false,
+    "expected_code": "CHECK_SCOPE_MISMATCH",
+    "lesson": "An outer matching receipt cannot rescue an inner stale check.",
+    "receipt": {
+      "schema_version": 1,
+      "synthetic": true,
+      "summary": "success",
+      "created_at": "2026-01-01T12:00:00.000Z",
+      "material_sha256": "1cbbeb9ed66990c959c3faa983f27de51277e51ef5a10f2a1012f431321e42e4",
+      "policy_sha256": "4509c9eee2e6911b18ff94e097497e2ef7ff714a0b853dd0e77854cabe47db95",
+      "checks": [
+        {
+          "id": "review",
+          "status": "passed",
+          "material_sha256": "3b707f52dabaa9b651c2799834314af87a63f49956f623a636b6effc5e4fca04",
+          "inspected_items": 1,
+          "evidence": [
+            {
+              "artifact_id": "review.txt",
+              "sha256": "7f75284a783e450dbef7e51adfbe466c1cbc63c03032ec2e99c14708adfa0ebc"
+            }
+          ]
+        },
+        {
+          "id": "tests",
+          "status": "passed",
+          "material_sha256": "1cbbeb9ed66990c959c3faa983f27de51277e51ef5a10f2a1012f431321e42e4",
+          "inspected_items": 1,
+          "evidence": [
+            {
+              "artifact_id": "tests.txt",
+              "sha256": "481b4cb57b45068760279e8e8371d064d0d67a0ee1a1f5ee8a2ef3c1c123dfee"
+            }
+          ]
+        }
+      ]
+    },
+    "material": "Synthetic change: handle an empty input.\n",
+    "policy": "{\"required_checks\":[\"review\",\"tests\"],\"min_inspected_items\":1,\"max_age_seconds\":3600,\"future_tolerance_seconds\":60}",
+    "artifacts": {
+      "review.txt": "Synthetic review notes; no person performed this review.\n",
+      "tests.txt": "Synthetic test output; the fixture is not a real external test run.\n"
+    },
+    "now": 1767268800000
+  },
+  {
+    "id": "forged-but-consistent",
+    "mutation": "forged-but-consistent",
+    "role": "limitation",
+    "consistent": true,
+    "expected_code": null,
+    "lesson": "Fabricated but mutually matching claims can pass. Hashes do not authenticate a review.",
+    "receipt": {
+      "schema_version": 1,
+      "synthetic": true,
+      "summary": "success",
+      "created_at": "2026-01-01T12:00:00.000Z",
+      "material_sha256": "1cbbeb9ed66990c959c3faa983f27de51277e51ef5a10f2a1012f431321e42e4",
+      "policy_sha256": "4509c9eee2e6911b18ff94e097497e2ef7ff714a0b853dd0e77854cabe47db95",
+      "checks": [
+        {
+          "id": "review",
+          "status": "passed",
+          "material_sha256": "1cbbeb9ed66990c959c3faa983f27de51277e51ef5a10f2a1012f431321e42e4",
+          "inspected_items": 1,
+          "evidence": [
+            {
+              "artifact_id": "review.txt",
+              "sha256": "1537f9ebe69282173814de4a8e22395610b9e3fd6dfd02649b9288b8ce83935c"
+            }
+          ]
+        },
+        {
+          "id": "tests",
+          "status": "passed",
+          "material_sha256": "1cbbeb9ed66990c959c3faa983f27de51277e51ef5a10f2a1012f431321e42e4",
+          "inspected_items": 1,
+          "evidence": [
+            {
+              "artifact_id": "tests.txt",
+              "sha256": "481b4cb57b45068760279e8e8371d064d0d67a0ee1a1f5ee8a2ef3c1c123dfee"
+            }
+          ]
+        }
+      ]
+    },
+    "material": "Synthetic change: handle an empty input.\n",
+    "policy": "{\"required_checks\":[\"review\",\"tests\"],\"min_inspected_items\":1,\"max_age_seconds\":3600,\"future_tolerance_seconds\":60}",
+    "artifacts": {
+      "review.txt": "A fabricated review statement, still internally consistent.",
+      "tests.txt": "Synthetic test output; the fixture is not a real external test run.\n"
+    },
+    "now": 1767268800000
+  }
+]
