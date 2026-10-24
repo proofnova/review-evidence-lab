@@ -1,6 +1,6 @@
 # Review Evidence Lab
 
-[한국어](README.ko.md) · [Walkthrough](docs/walkthrough.md) · [Prior art](docs/research.md)
+<a href="README.md"><kbd><strong>English</strong></kbd></a> <a href="README.ko.md"><kbd>한국어</kbd></a> <a href="README.ja.md"><kbd>日本語</kbd></a> <a href="README.zh-CN.md"><kbd>简体中文</kbd></a>
 
 **Replay the difference between “success” and evidence that actually matches the work.**
 
@@ -57,7 +57,7 @@ The `summary_only_demo` column is an intentionally permissive teaching baseline.
 
 [GitHub documents](https://docs.github.com/en/pull-requests/how-tos/merge-and-close-pull-requests/troubleshooting-required-status-checks) that successful required status checks can include `success`, `skipped`, and `neutral`. That behavior is intentional; integrations need to distinguish a permissible skip from work their own policy requires. A [historical review-tool issue](https://github.com/alibaba/open-code-review/issues/1454) also describes a successful exit after zero items were selected. That issue is closed; this lab does not claim the current tool still has that bug.
 
-Existing tools already cover important parts of this problem. [EvidenceGate](https://github.com/TheDarkniteFalls/evidencegate) includes review receipts, a conformance corpus and a Node replication; [alls-green](https://github.com/re-actors/alls-green) handles dependency-job gating; [in-toto](https://in-toto.io/docs/what-is-in-toto/) addresses supply-chain integrity. This lab contributes an independently written, bilingual set of small explanatory counterexamples. Its originality and learning benefit remain unproven. See the [dated comparison and counterarguments](docs/research.md).
+Existing tools already cover important parts of this problem. [EvidenceGate](https://github.com/TheDarkniteFalls/evidencegate) includes review receipts, a conformance corpus and a Node replication; [alls-green](https://github.com/re-actors/alls-green) handles dependency-job gating; [in-toto](https://in-toto.io/docs/what-is-in-toto/) addresses supply-chain integrity. This lab contributes an independently written, four-language set of small explanatory counterexamples. Its originality and learning benefit remain unproven. See the [dated comparison and counterarguments](docs/research.md).
 
 ## Evidence and next work
 

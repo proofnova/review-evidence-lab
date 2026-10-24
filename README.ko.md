@@ -1,6 +1,6 @@
 # Review Evidence Lab
 
-[English](README.md) · [실습 안내](docs/walkthrough.md) · [기존 대안 조사](docs/research.md)
+<a href="README.md"><kbd>English</kbd></a> <a href="README.ko.md"><kbd><strong>한국어</strong></kbd></a> <a href="README.ja.md"><kbd>日本語</kbd></a> <a href="README.zh-CN.md"><kbd>简体中文</kbd></a>
 
 **“성공”이라는 요약과 실제 작업에 맞는 검토 증거의 차이를 실행으로 확인합니다.**
 

@@ -1,17 +1,22 @@
+import {configureResource,getLanguage,onLanguage} from "./language.mjs?v=1d6cc4e81b97";
+import {labLocales,labLessons} from "./lab-locales.mjs?v=fcb0e1fd54dc";
+configureResource(labLocales);
+const L=key=>labLocales[getLanguage()][key];
+const lessonFor=item=>getLanguage()==='en'?item.lesson:labLessons[item.id]?.[getLanguage()]??item.lesson;
 import { asBytes, verifyInBrowser } from "./verify.mjs";
 
 const $ = (id) => document.getElementById(id);
-const translations = new Map();
-for (const element of document.querySelectorAll("[data-ko]"))
-  translations.set(element, element.innerHTML);
-let korean = false;
+
 let examples = [];
 let active;
 let result;
+let generation=0;
+let lastNotice;
 let originalMaterial;
 let originalPolicy;
 
 function note(message, kind = "notice") {
+  lastNotice={message,kind};
   const p = document.createElement("p");
   p.className = `badge ${kind}`;
   p.textContent = message;
@@ -19,17 +24,12 @@ function note(message, kind = "notice") {
 }
 
 function display(data) {
+  lastNotice=undefined;
   result = data;
   $("download").disabled = false;
   const badge = document.createElement("p");
   badge.className = `badge ${data.consistent ? "pass" : "fail"}`;
-  badge.textContent = data.consistent
-    ? korean
-      ? "기록이 일치함 · 수행 사실은 미확인"
-      : "RECEIPT CONSISTENT · authenticity unverified"
-    : korean
-      ? "검사 실패 · 근거를 확인하세요"
-      : "CHECKS FAILED · inspect the evidence";
+  badge.textContent = data.consistent ? L("consistent") : L("failed");
   const list = document.createElement("ul");
   list.className = "findings";
   for (const finding of data.findings) {
@@ -46,9 +46,7 @@ function display(data) {
   }
   const extra = document.createElement("p");
   extra.className = "small muted";
-  extra.textContent = korean
-    ? `의미 검증: 수행하지 않음 · ${data.synthetic ? "합성 기록" : "불러온 기록"}`
-    : `Semantic review: not performed · ${data.synthetic ? "synthetic record" : "loaded record"}`;
+  extra.textContent = L("semantic")+" · "+L(data.synthetic?"synthetic":"uploaded");
   $("result").replaceChildren(badge, list, extra);
 }
 
@@ -100,25 +98,28 @@ function inputContext() {
 }
 
 async function inspect() {
+  const runGeneration=++generation;
   $("verify").disabled = true;
   $("download").disabled = true;
   result = undefined;
   try {
     const { receipt, context } = inputContext();
-    display(await verifyInBrowser(receipt, context));
+    const checked=await verifyInBrowser(receipt, context);
+    if(runGeneration===generation)display(checked);
   } catch (error) {
-    note(`INPUT ERROR — ${error.message}`, "fail");
+    if(runGeneration!==generation)return;
+    note(`${L("inputError")} — ${error.message}`, "fail");
   } finally {
-    $("verify").disabled = false;
+    if(runGeneration===generation)$("verify").disabled = false;
   }
 }
 
 async function selectExample() {
   active = examples.find((item) => item.id === $("case").value);
   if (!active) return;
-  $("lesson").textContent = active.lesson;
+  $("lesson").textContent = lessonFor(active);
   $("clock").textContent =
-    `Synthetic fixture clock: ${new Date(active.now).toISOString()}`;
+    `${L("clock")}: ${new Date(active.now).toISOString()}`;
   $("material").value = active.material;
   $("policy").value = active.policy;
   $("receipt").value = JSON.stringify(active.receipt, null, 2);
@@ -150,25 +151,13 @@ $("policy").addEventListener("input", () => {
 });
 for (const id of ["material", "policy", "receipt", "artifacts"])
   $(id).addEventListener("input", () => {
+    generation++;
+    $("verify").disabled=false;
     result = undefined;
     $("download").disabled = true;
-    note(
-      korean
-        ? "내용이 바뀌었습니다. 다시 검사하세요."
-        : "Inputs changed. Run the checks again.",
-    );
+    note(L("changed"));
   });
-$("language").addEventListener("click", () => {
-  korean = !korean;
-  document.documentElement.lang = korean ? "ko" : "en";
-  for (const [element, english] of translations) {
-    if (korean)
-      element.textContent = element.dataset.ko.replaceAll("\\n", "\n");
-    else element.innerHTML = english;
-  }
-  $("language").textContent = korean ? "English" : "한국어";
-  if (result) display(result);
-});
+onLanguage(()=>{if(active){$("lesson").textContent=lessonFor(active);$("clock").textContent=L("clock")+": "+new Date(active.now).toISOString();}if(!active){$("lesson").textContent=L("yourFiles");$("clock").textContent=L("currentClock");}if(result)display(result);else if(lastNotice){const match=Object.values(labLocales).some(v=>v.changed===lastNotice.message);if(match)note(L("changed"),lastNotice.kind);}});
 $("local").addEventListener("click", async () => {
   result = undefined;
   $("download").disabled = true;
@@ -189,11 +178,9 @@ $("local").addEventListener("click", async () => {
       );
     }
     active = undefined;
-    $("lesson").textContent = korean
-      ? "내 파일 · 현재 시각 기준"
-      : "Your files · checked at the current clock";
+    $("lesson").textContent = L("yourFiles");
     $("clock").textContent =
-      "Current clock · raw uploaded material/policy bytes preserved until edited";
+      L("currentClock");
     $("material").value = material.text;
     $("policy").value = policy.text;
     $("receipt").value = receipt.text;
@@ -202,7 +189,7 @@ $("local").addEventListener("click", async () => {
     originalPolicy = policy.bytes;
     await inspect();
   } catch (error) {
-    note(`INPUT ERROR — ${error.message}`, "fail");
+    note(`${L("inputError")} — ${error.message}`, "fail");
   }
 });
 $("download").addEventListener("click", () => {
@@ -244,7 +231,7 @@ try {
   await selectExample();
 } catch (error) {
   note(
-    `Unable to start — ${error.message}. Serve this folder over HTTPS or localhost.`,
+    `${L("startError")} — ${error.message}. ${L("serve")}`,
     "fail",
   );
 }
