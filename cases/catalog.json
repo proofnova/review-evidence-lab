@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "synthetic": true,
+  "evaluation_time": "2026-01-01T12:00:00.000Z",
+  "cases": [
+    {
+      "id": "valid-control",
+      "mutation": "none",
+      "role": "control",
+      "consistent": true,
+      "expected_code": null,
+      "lesson": "A complete, unchanged synthetic record is accepted."
+    },
+    {
+      "id": "missing-checks",
+      "mutation": "missing-checks",
+      "consistent": false,
+      "expected_code": "REQUIRED_CHECK_MISSING",
+      "lesson": "A successful summary cannot replace absent checks."
+    },
+    {
+      "id": "required-check-skipped",
+      "mutation": "required-check-skipped",
+      "consistent": false,
+      "expected_code": "CHECK_NOT_PASSED",
+      "lesson": "A deliberately skipped check is different from a performed check."
+    },
+    {
+      "id": "unknown-review-state",
+      "mutation": "unknown-review-state",
+      "consistent": false,
+      "expected_code": "CHECK_NOT_PASSED",
+      "lesson": "Unknown is a separate state, not a success."
+    },
+    {
+      "id": "failure-behind-summary",
+      "mutation": "failure-behind-summary",
+      "consistent": false,
+      "expected_code": "CHECK_NOT_PASSED",
+      "lesson": "A failed detail must survive a successful outer summary."
+    },
+    {
+      "id": "zero-selected-items",
+      "mutation": "zero-selected-items",
+      "consistent": false,
+      "expected_code": "INSUFFICIENT_INSPECTION",
+      "lesson": "A check reporting zero inspected items needs explicit handling."
+    },
+    {
+      "id": "duplicate-check-id",
+      "mutation": "duplicate-check-id",
+      "consistent": false,
+      "expected_code": "DUPLICATE_CHECK",
+      "lesson": "Repeated names are not independent checks."
+    },
+    {
+      "id": "material-changed",
+      "mutation": "material-changed",
+      "consistent": false,
+      "expected_code": "MATERIAL_MISMATCH",
+      "lesson": "Changing the actual subject invalidates its old receipt."
+    },
+    {
+      "id": "policy-changed",
+      "mutation": "policy-changed",
+      "consistent": false,
+      "expected_code": "POLICY_MISMATCH",
+      "lesson": "An earlier policy cannot silently approve a new policy."
+    },
+    {
+      "id": "artifact-absent",
+      "mutation": "artifact-absent",
+      "consistent": false,
+      "expected_code": "ARTIFACT_MISSING",
+      "lesson": "A reference is not an available artifact."
+    },
+    {
+      "id": "artifact-changed",
+      "mutation": "artifact-changed",
+      "consistent": false,
+      "expected_code": "ARTIFACT_MISMATCH",
+      "lesson": "Reusing a path after overwriting a log changes the evidence."
+    },
+    {
+      "id": "artifact-empty",
+      "mutation": "artifact-empty",
+      "consistent": false,
+      "expected_code": "ARTIFACT_EMPTY",
+      "lesson": "Even a correctly hashed empty log is insufficient."
+    },
+    {
+      "id": "receipt-too-old",
+      "mutation": "receipt-too-old",
+      "consistent": false,
+      "expected_code": "STALE_RECEIPT",
+      "lesson": "A matching subject does not remove freshness requirements."
+    },
+    {
+      "id": "receipt-in-future",
+      "mutation": "receipt-in-future",
+      "consistent": false,
+      "expected_code": "FUTURE_RECEIPT",
+      "lesson": "Future dates should not bypass freshness checks."
+    },
+    {
+      "id": "one-check-omitted",
+      "mutation": "one-check-omitted",
+      "consistent": false,
+      "expected_code": "REQUIRED_CHECK_MISSING",
+      "lesson": "A partial set of successful checks is still partial."
+    },
+    {
+      "id": "check-for-other-scope",
+      "mutation": "check-for-other-scope",
+      "consistent": false,
+      "expected_code": "CHECK_SCOPE_MISMATCH",
+      "lesson": "An outer matching receipt cannot rescue an inner stale check."
+    },
+    {
+      "id": "forged-but-consistent",
+      "mutation": "forged-but-consistent",
+      "role": "limitation",
+      "consistent": true,
+      "expected_code": null,
+      "lesson": "Fabricated but mutually matching claims can pass. Hashes do not authenticate a review."
+    }
+  ]
+}
