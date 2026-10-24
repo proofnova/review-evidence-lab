@@ -1,0 +1,5 @@
+/reports/local-report.json
+/reports/private/
+/reports/demo/
+/node_modules/
+*.tmp

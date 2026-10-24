@@ -1,0 +1,17 @@
+{
+  "name": "@proofnova/review-evidence-lab",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Executable counterexamples for incomplete and stale review evidence",
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node --test",
+    "lab": "node src/lab.mjs",
+    "report": "node src/lab.mjs --out reports/local-report.json",
+    "verify": "node src/verify.mjs"
+  }
+}
