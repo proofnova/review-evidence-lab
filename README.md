@@ -6,6 +6,8 @@
 
 An offline teaching lab for maintainers building review and CI integrations. Seventeen synthetic cases show what happens when a required review is skipped, inspects zero items, references an older change, or loses its evidence files. Each case names the invariant that failed. One deliberately forged but internally consistent record demonstrates the boundary: matching hashes do not prove that a review happened.
 
+**[Open the interactive playground](https://proofnova.github.io/review-evidence-lab/)** to change examples, inspect findings, check local UTF-8 files and download a result. Chosen files stay in your browser. The browser and Node adapters share the same rule engine.
+
 ## Try it
 
 Node.js 22 or later. No dependencies, account, API key or model call.
@@ -16,6 +18,8 @@ cd review-evidence-lab
 node src/lab.mjs
 node --test
 ```
+
+For a local browser preview, run `node scripts/serve.mjs` and open `http://127.0.0.1:4173`. Direct `file://` opening is unsupported because the app loads JavaScript modules and fixtures. After changing the source corpus, run `node scripts/build-browser-fixtures.mjs`; a test detects a stale browser fixture cache.
 
 The lab prints 17 case results and exits successfully when all expected outcomes match. Fifteen incomplete or inconsistent records are rejected; a healthy control and a fabricated-but-consistent record are accepted. Acceptance means **receipt consistency**, never review authenticity or code correctness.
 

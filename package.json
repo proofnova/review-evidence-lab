@@ -9,6 +9,8 @@
     "node": ">=22"
   },
   "scripts": {
+    "preview": "node scripts/serve.mjs",
+    "build:fixtures": "node scripts/build-browser-fixtures.mjs",
     "test": "node --test",
     "lab": "node src/lab.mjs",
     "report": "node src/lab.mjs --out reports/local-report.json",

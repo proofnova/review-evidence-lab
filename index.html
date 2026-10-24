@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Explore AI review evidence failures in your browser. Seventeen runnable cases, local file verification, no API key."
+    />
+    <title>Review Evidence Lab — interactive playground</title>
+    <link rel="stylesheet" href="web/style.css" />
+    <script type="module" src="web/app.mjs"></script>
+  </head>
+  <body>
+    <header>
+      <a class="brand" href="./">PROOFNOVA <span>/ EVIDENCE LAB</span></a>
+      <nav aria-label="Main">
+        <a href="https://github.com/proofnova/review-evidence-lab"
+          >Source & lessons ↗</a
+        ><button id="language" type="button">한국어</button>
+      </nav>
+    </header>
+    <main>
+      <section class="hero">
+        <p class="eyebrow" data-ko="AI 검토 · 직접 실행하는 실습">
+          AI REVIEW · HANDS-ON LAB
+        </p>
+        <h1 data-ko="성공이라고 썼다고,\n검토가 끝난 걸까요?">
+          A green summary.<br />But was the work checked?
+        </h1>
+        <p
+          class="intro"
+          data-ko="17개 사례를 바꾸며 검토 누락과 오래된 증거를 찾아보세요. 내 파일도 브라우저 안에서 검사할 수 있습니다."
+        >
+          Change 17 examples to uncover skipped work and stale evidence. Or
+          check your own files, entirely in your browser.
+        </p>
+        <div class="pills">
+          <span data-ko="추가 설치 없음">No install</span
+          ><span data-ko="API 키 없음">No API key</span
+          ><span data-ko="선택한 파일 전송 없음">Chosen files stay here</span>
+        </div>
+      </section>
+      <section class="workspace" aria-label="Evidence playground">
+        <aside class="panel cases">
+          <div class="section-number">01 / EXPLORE</div>
+          <h2 data-ko="실패를 선택하세요">Pick a failure</h2>
+          <label for="case" data-ko="합성 사례">Synthetic example</label
+          ><select id="case" disabled>
+            <option>Loading…</option>
+          </select>
+          <p id="lesson" class="lesson" aria-live="polite"></p>
+          <button id="reset" type="button" data-ko="사례 초기화">
+            Reset example
+          </button>
+          <details>
+            <summary data-ko="내 파일 불러오기">Use my files</summary>
+            <p
+              class="small"
+              data-ko="이 실습의 기록 형식만 지원합니다. 파일당 512 KiB 이하. UTF-8 자료와 정책, JSON 기록, 증거 파일을 선택하세요. 현재 시각으로 검사합니다."
+            >
+              This lab's receipt format only. Maximum 512 KiB per file. Choose
+              UTF-8 material/policy, a JSON receipt and artifact files. Uses the
+              current clock.
+            </p>
+            <label for="material-file"
+              >Material<input id="material-file" type="file" /></label
+            ><label for="policy-file"
+              >Policy<input
+                id="policy-file"
+                type="file"
+                accept=".json" /></label
+            ><label for="receipt-file"
+              >Receipt<input
+                id="receipt-file"
+                type="file"
+                accept=".json" /></label
+            ><label for="artifact-files"
+              >Artifacts<input
+                id="artifact-files"
+                type="file"
+                multiple /></label
+            ><button id="local" type="button" data-ko="선택한 파일 검사">
+              Check selected files
+            </button>
+          </details>
+          <p
+            class="small muted"
+            data-ko="모든 예제는 합성 자료입니다. 실제 검토자나 사용자 반응이 아닙니다."
+          >
+            All examples are synthetic. No actual reviewer or user feedback is
+            represented.
+          </p>
+        </aside>
+        <section class="panel inputs">
+          <div class="section-number">02 / INSPECT & CHANGE</div>
+          <h2 data-ko="무엇이 달라졌나요?">What changed?</h2>
+          <p id="clock" class="small"></p>
+          <label for="material" data-ko="검토 대상 자료"
+            >Material being reviewed</label
+          ><textarea id="material" rows="3" spellcheck="false"></textarea>
+          <div class="editors">
+            <div>
+              <label for="receipt">Receipt · JSON</label
+              ><textarea id="receipt" rows="15" spellcheck="false"></textarea>
+            </div>
+            <div>
+              <label for="artifacts">Artifacts · JSON text map</label
+              ><textarea id="artifacts" rows="8" spellcheck="false"></textarea
+              ><label for="policy">Policy · exact bytes</label
+              ><textarea id="policy" rows="5" spellcheck="false"></textarea>
+            </div>
+          </div>
+          <button
+            id="verify"
+            class="primary"
+            type="button"
+            disabled
+            data-ko="변경한 내용 검사"
+          >
+            Run the checks <span>↗</span>
+          </button>
+        </section>
+        <section class="panel results">
+          <div class="section-number">03 / UNDERSTAND</div>
+          <div class="result-heading">
+            <h2 data-ko="증거가 말하는 것">What the evidence says</h2>
+            <button
+              id="download"
+              type="button"
+              disabled
+              data-ko="결과 JSON 저장"
+            >
+              Download JSON
+            </button>
+          </div>
+          <div id="result" aria-live="polite" aria-atomic="true">
+            <p data-ko="사례를 불러오는 중입니다.">Loading the lab…</p>
+          </div>
+          <div class="boundary">
+            <strong data-ko="일관성 ≠ 진실성"
+              >Consistency ≠ authenticity</strong
+            >
+            <p
+              data-ko="해시는 자료가 일치하는지 확인합니다. 검토자가 실제 검토했는지, 코드가 정확한지는 증명하지 않습니다. ‘forged-but-consistent’ 사례에서 그 한계를 확인하세요."
+            >
+              Hashes check whether bytes match. They cannot prove a reviewer did
+              the work or that the code is correct. Try “forged-but-consistent”
+              to explore that limit.
+            </p>
+          </div>
+        </section>
+      </section>
+      <footer>
+        <p data-ko="실제로 검사하고, 한계를 설명하고, 재현할 수 있게 만듭니다.">
+          Run the checks. Explain the limits. Make the result reproducible.
+        </p>
+        <a
+          href="https://github.com/proofnova/review-evidence-lab/blob/main/docs/research.md"
+          data-ko="기존 대안과 반박 기록 ↗"
+          >Prior art & counterarguments ↗</a
+        >
+      </footer>
+    </main>
+  </body>
+</html>
